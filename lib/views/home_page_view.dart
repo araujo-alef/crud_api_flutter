@@ -12,11 +12,10 @@ class HomePage extends StatefulWidget {
 Future<ApiResp> deleteMovie(String id) async {
   final dio = Dio();
   try {
-    Response response = await dio.delete(
-        "https://quiet-atoll-29242.herokuapp.com/filme/delete",
-        data: {
-          "id": id,
-        });
+    Response response = await dio
+        .delete("https://quiet-atoll-29242.herokuapp.com/filme/delete", data: {
+      "id": id,
+    });
     return ApiResp.fromJson(response.data);
   } catch (e) {
     rethrow;
@@ -35,7 +34,6 @@ Future<List<FilmeModel>> pegarDados() async {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   Widget build(BuildContext context) {
     final movie = Get.Get.put(MovieController());
@@ -45,51 +43,73 @@ class _HomePageState extends State<HomePage> {
         title: Text("Lista de Filmes"),
       ),
       body: Container(
-        child: FutureBuilder<List>(
-          future: pegarDados(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return FloatingActionButton(
-                onPressed: () {
-                  pegarDados();
-                },
-                child: Center(child: Icon(Icons.replay_outlined)),
-              );
-            }
+        child: Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: FutureBuilder<List>(
+            future: pegarDados(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return FloatingActionButton(
+                  onPressed: () {
+                    pegarDados();
+                  },
+                  child: Center(child: Icon(Icons.replay_outlined)),
+                );
+              }
 
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: NetworkImage(snapshot.data![index].foto),
-                    ),
-                    title: Text(snapshot.data![index].nome),
-                    subtitle: Text(snapshot.data![index].elenco),
-                    trailing: IconButton(
-                      onPressed: () async {
-                        final id = snapshot.data![index].id;
-                        await deleteMovie(id);
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  itemCount: snapshot.data!.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(snapshot.data![index].foto),
+                      ),
+                      title: Text(snapshot.data![index].nome),
+                      subtitle: Text(snapshot.data![index].elenco),
+                      trailing: Wrap(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              final title = snapshot.data![index].nome;
+                              final image = snapshot.data![index].foto;
+                              final descricao = snapshot.data![index].descricao;
+                              final elenco = snapshot.data![index].elenco;
+                              movie.setMovie(title, image, descricao, elenco);
+                              Get.Get.toNamed("addMovie");
+                            },
+                            icon: Icon(Icons.edit),
+                            color: Colors.green,
+                          ),
+                          IconButton(
+                            onPressed: () async {
+                              final id = snapshot.data![index].id;
+                              await deleteMovie(id);
+                            },
+                            icon: Icon(Icons.delete),
+                            color: Colors.red,
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        final title = snapshot.data![index].nome;
+                        final image = snapshot.data![index].foto;
+                        final descricao = snapshot.data![index].descricao;
+                        final elenco = snapshot.data![index].elenco;
+                        movie.setMovie(title, image, descricao, elenco);
+                        Get.Get.toNamed('/movie');
                       },
-                      icon: Icon(Icons.delete),
-                      color: Colors.red,
-                    ),
-                    onTap: () {
-                      final title = snapshot.data![index].nome;
-                      movie.setMovie(title);
-                      Get.Get.toNamed('/movie');
-                    },
-                  );
-                },
-              );
-            }
+                    );
+                  },
+                );
+              }
 
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          },
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
