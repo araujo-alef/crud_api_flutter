@@ -65,17 +65,17 @@ class HomePage extends StatelessWidget {
                                     actions: [
                                       TextButton(
                                         onPressed: (){
+                                          Get.back();
+                                        },
+                                        child: Text('Cancelar'),
+                                      ),
+                                      TextButton(
+                                        onPressed: (){
                                           final id = movie.listMovie[index].id.toString();
                                           movie.deleteMovie(id);
                                           Get.back();
                                         },
                                         child: Text('Sim, excluir'),
-                                      ),
-                                      TextButton(
-                                        onPressed: (){
-                                          Get.back();
-                                        },
-                                        child: Text('Cancelar'),
                                       ),
                                     ],
                                   )
