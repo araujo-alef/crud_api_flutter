@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
                                 Get.toNamed("addMovie");
                               },
                               icon: Icon(Icons.edit),
-                              color: Colors.green,
+                              color: Colors.blueGrey,
                             ),
                             IconButton(
                               icon: Icon(Icons.delete),
