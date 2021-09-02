@@ -57,8 +57,29 @@ class HomePage extends StatelessWidget {
                               icon: Icon(Icons.delete),
                               color: Colors.red,
                               onPressed: () {
-                                final id = movie.listMovie[index].id.toString();
-                                movie.deleteMovie(id);
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: Text('Excluir'),
+                                    content: Text("Deseja realmente excluir este filme?"),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: (){
+                                          final id = movie.listMovie[index].id.toString();
+                                          movie.deleteMovie(id);
+                                          Get.back();
+                                        },
+                                        child: Text('Sim, excluir'),
+                                      ),
+                                      TextButton(
+                                        onPressed: (){
+                                          Get.back();
+                                        },
+                                        child: Text('Cancelar'),
+                                      ),
+                                    ],
+                                  )
+                                );
                               },
                             ),
                           ],
