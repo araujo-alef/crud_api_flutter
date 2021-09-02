@@ -10,41 +10,6 @@ class AddMovie extends StatefulWidget {
   _AddMovieState createState() => _AddMovieState();
 }
 
-Future<ApiResp> addMovie(
-    String nome, String foto, String descricao, String elenco) async {
-  final dio = Dio();
-  try {
-    Response response = await dio
-        .post("https://quiet-atoll-29242.herokuapp.com/filme/add", data: {
-      "nome": nome,
-      "foto": foto,
-      "descricao": descricao,
-      "elenco": elenco,
-    });
-    return ApiResp.fromJson(response.data);
-  } catch (e) {
-    rethrow;
-  }
-}
-
-Future<ApiResp> editMovie(
-    String nome, String foto, String descricao, String elenco, String id) async {
-  final dio = Dio();
-  try {
-    Response response = await dio
-        .patch("https://quiet-atoll-29242.herokuapp.com/filme/edit", data: {
-      "nome": nome,
-      "foto": foto,
-      "descricao": descricao,
-      "elenco": elenco,
-      "id": id,
-    });
-    return ApiResp.fromJson(response.data);
-  } catch (e) {
-    rethrow;
-  }
-}
-
 class _AddMovieState extends State<AddMovie> {
 
   @override
@@ -100,10 +65,10 @@ class _AddMovieState extends State<AddMovie> {
                       final elenco = movie.elencoMovie.value;
 
                       if(movie.idMovie.value == "") {
-                        await addMovie(nome, foto, descricao, elenco);
+                        movie.addMovie(nome, foto, descricao, elenco);
                       } else {
                         final id = movie.idMovie.value;
-                        await editMovie(nome, foto, descricao, elenco, id);
+                        movie.editMovie(nome, foto, descricao, elenco, id);
                       }
                       movie.cleanMovie();
                       Get.Get.back();

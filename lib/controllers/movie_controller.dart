@@ -3,7 +3,7 @@ import 'package:crud_api/models/filme_model.dart';
 import 'package:get/get.dart';
 
 class MovieController extends GetxController {
-  final listHistory = <FilmeModel>[].obs;
+  final listMovie = <FilmeModel>[].obs;
 
   final titleMovie = "".obs;
   final imageMovie = "".obs;
@@ -14,12 +14,26 @@ class MovieController extends GetxController {
   void fetchList() async {
     Api api = Api();
     final response = await api.fetchData();
-    if(response == null){
-      Get.snackbar("Erro", "Erro ao buscar filmes");
-    } else {
-      listHistory.value = response;
-    }
-}
+    listMovie.assignAll(response);
+  }
+
+  void deleteMovie( String id) async {
+    Api api = Api();
+    await api.deleteMovie(id);
+    fetchList();
+  }
+
+  void addMovie(String nome, String foto, String descricao, String elenco) async {
+    Api api = Api();
+    await api.addMovie(nome, foto, descricao, elenco);
+    fetchList();
+  }
+
+  void editMovie(String nome, String foto, String descricao, String elenco, String id) async {
+    Api api = Api();
+    await api.editMovie(nome, foto, descricao, elenco, id);
+    fetchList();
+  }
 
   void setTitle(String title) {
     titleMovie.value = title;
