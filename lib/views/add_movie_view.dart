@@ -106,7 +106,7 @@ class _AddMovieState extends State<AddMovie> {
                         await editMovie(nome, foto, descricao, elenco, id);
                       }
                       movie.cleanMovie();
-                      Get.Get.to(HomePage());
+                      Get.Get.back();
                     },
                     child: Icon(Icons.add),
                   ),
