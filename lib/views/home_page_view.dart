@@ -61,45 +61,54 @@ class _HomePageState extends State<HomePage> {
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(snapshot.data![index].foto),
+                    return Material(
+                      elevation: 2,
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          backgroundImage: NetworkImage(snapshot.data![index].foto),
+                        ),
+                        title: Text(snapshot.data![index].nome),
+                        subtitle: Text(snapshot.data![index].elenco),
+                        trailing: Wrap(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                final title = snapshot.data![index].nome;
+                                final image = snapshot.data![index].foto;
+                                final descricao = snapshot.data![index].descricao;
+                                final elenco = snapshot.data![index].elenco;
+                                final id = snapshot.data![index].id;
+
+                                movie.setMovie(title, image, descricao, elenco, id);
+
+                                Get.Get.toNamed("addMovie");
+                              },
+                              icon: Icon(Icons.edit),
+                              color: Colors.green,
+                            ),
+                            IconButton(
+                              onPressed: () async {
+                                final id = snapshot.data![index].id;
+                                await deleteMovie(id);
+                              },
+                              icon: Icon(Icons.delete),
+                              color: Colors.red,
+                            ),
+                          ],
+                        ),
+                        onTap: () {
+                          final title = snapshot.data![index].nome;
+                          final image = snapshot.data![index].foto;
+                          final descricao = snapshot.data![index].descricao;
+                          final elenco = snapshot.data![index].elenco;
+                          final id = snapshot.data![index].id;
+
+
+                          movie.setMovie(title, image, descricao, elenco, id);
+                          Get.Get.toNamed('/movie');
+                        },
                       ),
-                      title: Text(snapshot.data![index].nome),
-                      subtitle: Text(snapshot.data![index].elenco),
-                      trailing: Wrap(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              final title = snapshot.data![index].nome;
-                              final image = snapshot.data![index].foto;
-                              final descricao = snapshot.data![index].descricao;
-                              final elenco = snapshot.data![index].elenco;
-                              movie.setMovie(title, image, descricao, elenco);
-                              Get.Get.toNamed("addMovie");
-                            },
-                            icon: Icon(Icons.edit),
-                            color: Colors.green,
-                          ),
-                          IconButton(
-                            onPressed: () async {
-                              final id = snapshot.data![index].id;
-                              await deleteMovie(id);
-                            },
-                            icon: Icon(Icons.delete),
-                            color: Colors.red,
-                          ),
-                        ],
-                      ),
-                      onTap: () {
-                        final title = snapshot.data![index].nome;
-                        final image = snapshot.data![index].foto;
-                        final descricao = snapshot.data![index].descricao;
-                        final elenco = snapshot.data![index].elenco;
-                        movie.setMovie(title, image, descricao, elenco);
-                        Get.Get.toNamed('/movie');
-                      },
                     );
                   },
                 );

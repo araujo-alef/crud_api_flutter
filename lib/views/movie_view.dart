@@ -64,7 +64,7 @@ class _MovieState extends State<Movie> {
                   SizedBox(
                       width: double.infinity,
                       child: Text(
-                        movie.decricaoMovie.value,
+                        movie.descricaoMovie.value,
                         textAlign: TextAlign.justify,
                       )),
                   SizedBox(

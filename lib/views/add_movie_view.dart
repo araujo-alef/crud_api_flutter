@@ -27,11 +27,25 @@ Future<ApiResp> addMovie(
   }
 }
 
+Future<ApiResp> editMovie(
+    String nome, String foto, String descricao, String elenco, String id) async {
+  final dio = Dio();
+  try {
+    Response response = await dio
+        .patch("https://quiet-atoll-29242.herokuapp.com/filme/edit", data: {
+      "nome": nome,
+      "foto": foto,
+      "descricao": descricao,
+      "elenco": elenco,
+      "id": id,
+    });
+    return ApiResp.fromJson(response.data);
+  } catch (e) {
+    rethrow;
+  }
+}
+
 class _AddMovieState extends State<AddMovie> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController fotoController = TextEditingController();
-  final TextEditingController descricaoController = TextEditingController();
-  final TextEditingController elencoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,62 +55,65 @@ class _AddMovieState extends State<AddMovie> {
       appBar: AppBar(
         title: Text('Adicionar Filme'),
       ),
-      body: Container(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 5, left: 30, right: 30),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 18,
-              ),
-              Text(
-                "Nome",
-                textAlign: TextAlign.left,
-              ),
-              TextField(
-                controller: nameController,
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Text("Link da Foto"),
-              TextField(
-                controller: fotoController,
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Text("Descrição"),
-              TextField(
-                controller: descricaoController,
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Text("Elenco"),
-              TextField(
-                controller: elencoController,
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              FloatingActionButton(
-                onPressed: () async {
-                  final nome = nameController.text;
-                  final foto = fotoController.text;
-                  final descricao = descricaoController.text;
-                  final elenco = elencoController.text;
+      body: Padding(
+        padding: const EdgeInsets.only(top: 5, left: 30, right: 30),
+        child: Form(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 20),
+                  TextFormField(
+                    initialValue: movie.titleMovie.value,
+                    onChanged: (text) => movie.setTitle(text),
+                    decoration: InputDecoration(
+                        labelText: "Nome", border: OutlineInputBorder()),
+                  ),
+                  SizedBox(height: 20),
+                  TextFormField(
+                    initialValue: movie.imageMovie.value,
+                    onChanged: (text) => movie.setImage(text),
+                    decoration: InputDecoration(labelText: "Link da foto", border: OutlineInputBorder()),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    initialValue: movie.descricaoMovie.value,
+                    onChanged: (text) => movie.setDescricao(text),
+                    decoration: InputDecoration(labelText: "Descrição", border: OutlineInputBorder()),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    initialValue: movie.elencoMovie.value,
+                    onChanged: (text) => movie.setElenco(text),
+                    decoration: InputDecoration(labelText: "Elenco", border: OutlineInputBorder()),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  FloatingActionButton(
+                    onPressed: () async {
+                      final nome = movie.titleMovie.value;
+                      final foto = movie.imageMovie.value;
+                      final descricao = movie.descricaoMovie.value;
+                      final elenco = movie.elencoMovie.value;
 
-                  var resp = await addMovie(nome, foto, descricao, elenco);
-                  print(resp.toString());
-                  Get.Get.to(HomePage());
-                },
-                child: Icon(Icons.add),
-              )
-            ],
-          ),
+                      if(movie.idMovie.value == "") {
+                        await addMovie(nome, foto, descricao, elenco);
+                      } else {
+                        final id = movie.idMovie.value;
+                        await editMovie(nome, foto, descricao, elenco, id);
+                      }
+                      movie.cleanMovie();
+                      Get.Get.to(HomePage());
+                    },
+                    child: Icon(Icons.add),
+                  ),
+                ],
+              ),
+            ),
         ),
-      ),
     );
   }
 }
