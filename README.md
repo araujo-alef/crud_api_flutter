@@ -1,6 +1,6 @@
 # crud_api
 
-A new Flutter project.
+App Flutter para consumo de RestApi com Dio e GetX
 
 ## Getting Started
 
