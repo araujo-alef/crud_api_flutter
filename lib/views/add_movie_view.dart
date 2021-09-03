@@ -1,7 +1,4 @@
-import 'package:crud_api/controllers/movie_controller.dart';
-import 'package:crud_api/models/filme_model.dart';
-import 'package:crud_api/views/home_page_view.dart';
-import 'package:dio/dio.dart';
+import 'package:crud_api/app/controllers/movie_controller/movie_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as Get;
 
@@ -14,7 +11,7 @@ class _AddMovieState extends State<AddMovie> {
 
   @override
   Widget build(BuildContext context) {
-    final movie = Get.Get.put(MovieController());
+    final movie = Get.Get.put(MovieController()); 
 
     return Scaffold(
       appBar: AppBar(

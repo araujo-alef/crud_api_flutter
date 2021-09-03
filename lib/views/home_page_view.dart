@@ -1,8 +1,6 @@
-import 'package:crud_api/controllers/movie_controller.dart';
-import 'package:dio/dio.dart' as Dio;
+import 'package:crud_api/app/controllers/movie_controller/movie_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:crud_api/models/filme_model.dart';
 
 class HomePage extends StatelessWidget {
 

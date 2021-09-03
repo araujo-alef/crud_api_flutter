@@ -1,4 +1,4 @@
-import 'package:crud_api/models/filme_model.dart';
+import 'package:crud_api/app/data/models/filme_model.dart';
 import 'package:dio/dio.dart';
 
 class Api {

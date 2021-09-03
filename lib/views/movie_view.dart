@@ -1,4 +1,4 @@
-import 'package:crud_api/controllers/movie_controller.dart';
+import 'package:crud_api/app/controllers/movie_controller/movie_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as Get;
 

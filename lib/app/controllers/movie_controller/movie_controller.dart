@@ -1,5 +1,5 @@
-import 'package:crud_api/controllers/repositories/home_repository.dart';
-import 'package:crud_api/models/filme_model.dart';
+import 'package:crud_api/app/data/models/filme_model.dart';
+import 'package:crud_api/app/data/repositories/api_repository.dart';
 import 'package:get/get.dart';
 
 class MovieController extends GetxController {
@@ -11,27 +11,26 @@ class MovieController extends GetxController {
   final elencoMovie = "".obs;
   final idMovie = "".obs;
 
+  ApiRepository api = ApiRepository();
+
   void fetchList() async {
-    Api api = Api();
+    
     final response = await api.fetchData();
     listMovie.assignAll(response);
   }
 
-  void deleteMovie( String id) async {
-    Api api = Api();
-    await api.deleteMovie(id);
+  void deleteMovie( String id) {
+    api.deleteMovie(id);
     fetchList();
   }
 
-  void addMovie(String nome, String foto, String descricao, String elenco) async {
-    Api api = Api();
-    await api.addMovie(nome, foto, descricao, elenco);
+  void addMovie(String nome, String foto, String descricao, String elenco) {
+    api.addMovie(nome, foto, descricao, elenco);
     fetchList();
   }
 
-  void editMovie(String nome, String foto, String descricao, String elenco, String id) async {
-    Api api = Api();
-    await api.editMovie(nome, foto, descricao, elenco, id);
+  void editMovie(String nome, String foto, String descricao, String elenco, String id) {
+    api.editMovie(nome, foto, descricao, elenco, id);
     fetchList();
   }
 
