@@ -11,7 +11,8 @@ class _AddMovieState extends State<AddMovie> {
 
   @override
   Widget build(BuildContext context) {
-    final movie = Get.Get.put(MovieController()); 
+    final movie = Get.Get.put(MovieController());
+    final _form = GlobalKey<FormState>();
 
     return Scaffold(
       appBar: AppBar(
@@ -20,10 +21,16 @@ class _AddMovieState extends State<AddMovie> {
       body: Padding(
         padding: const EdgeInsets.only(top: 5, left: 30, right: 30),
         child: Form(
+          key: _form,
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 20),
                   TextFormField(
+                    validator: (value) {
+                      if(value == null || value.isEmpty || value == "") {
+                        return "Campo obrigatório";
+                      }
+                    },
                     initialValue: movie.titleMovie.value,
                     onChanged: (text) => movie.setTitle(text),
                     decoration: InputDecoration(
@@ -31,6 +38,11 @@ class _AddMovieState extends State<AddMovie> {
                   ),
                   SizedBox(height: 20),
                   TextFormField(
+                    validator: (value) {
+                      if(value == null || value.isEmpty || value == "") {
+                        return "Campo obrigatório";
+                      }
+                    },
                     initialValue: movie.imageMovie.value,
                     onChanged: (text) => movie.setImage(text),
                     decoration: InputDecoration(labelText: "Link da foto", border: OutlineInputBorder()),
@@ -39,6 +51,11 @@ class _AddMovieState extends State<AddMovie> {
                     height: 20,
                   ),
                   TextFormField(
+                    validator: (value) {
+                      if(value == null || value.isEmpty || value == "") {
+                        return "Campo obrigatório";
+                      }
+                    },
                     initialValue: movie.descricaoMovie.value,
                     onChanged: (text) => movie.setDescricao(text),
                     decoration: InputDecoration(labelText: "Descrição", border: OutlineInputBorder()),
@@ -47,6 +64,11 @@ class _AddMovieState extends State<AddMovie> {
                     height: 20,
                   ),
                   TextFormField(
+                    validator: (value) {
+                      if(value == null || value.isEmpty || value == "") {
+                        return "Campo obrigatório";
+                      }
+                    },
                     initialValue: movie.elencoMovie.value,
                     onChanged: (text) => movie.setElenco(text),
                     decoration: InputDecoration(labelText: "Elenco", border: OutlineInputBorder()),
@@ -61,7 +83,9 @@ class _AddMovieState extends State<AddMovie> {
                       final descricao = movie.descricaoMovie.value;
                       final elenco = movie.elencoMovie.value;
 
-                      if(movie.idMovie.value == "") {
+                      final isValid = _form.currentState!.validate();
+                      if(isValid) {
+                        if(movie.idMovie.value == "") {
                         movie.addMovie(nome, foto, descricao, elenco);
                       } else {
                         final id = movie.idMovie.value;
@@ -69,6 +93,7 @@ class _AddMovieState extends State<AddMovie> {
                       }
                       movie.cleanMovie();
                       Get.Get.back();
+                      }
                     },
                     child: Icon(Icons.add),
                   ),
