@@ -1,6 +1,4 @@
-import 'package:crud_api/views/add_movie_view.dart';
-import 'package:crud_api/views/home_page_view.dart';
-import 'package:crud_api/views/movie_view.dart';
+import 'package:crud_api/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,14 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Consumindo RestAPI',
       theme: ThemeData.dark(),
       initialRoute: '/',
-      getPages: [
-        GetPage(name: '/', page: () => HomePage()),
-        GetPage(name: '/addMovie', page: () => AddMovie()),
-        GetPage(name: '/movie', page: () => Movie()),
-      ],
+      getPages: AppPages.routes,
     );
   }
 }

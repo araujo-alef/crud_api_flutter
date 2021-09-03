@@ -11,26 +11,25 @@ class MovieController extends GetxController {
   final elencoMovie = "".obs;
   final idMovie = "".obs;
 
-  ApiRepository api = ApiRepository();
+  final ApiRepository apiRepository = ApiRepository();
 
   void fetchList() async {
-    
-    final response = await api.fetchData();
+    final response = await apiRepository.fetchData();
     listMovie.assignAll(response);
   }
 
-  void deleteMovie( String id) {
-    api.deleteMovie(id);
+  void deleteMovie( String id) async {
+    await apiRepository.deleteMovie(id);
     fetchList();
   }
 
-  void addMovie(String nome, String foto, String descricao, String elenco) {
-    api.addMovie(nome, foto, descricao, elenco);
+  void addMovie(String nome, String foto, String descricao, String elenco) async {
+    await apiRepository.addMovie(nome, foto, descricao, elenco);
     fetchList();
   }
 
-  void editMovie(String nome, String foto, String descricao, String elenco, String id) {
-    api.editMovie(nome, foto, descricao, elenco, id);
+  void editMovie(String nome, String foto, String descricao, String elenco, String id) async {
+    await apiRepository.editMovie(nome, foto, descricao, elenco, id);
     fetchList();
   }
 

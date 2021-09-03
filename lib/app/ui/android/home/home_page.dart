@@ -2,7 +2,7 @@ import 'package:crud_api/app/controllers/movie_controller/movie_controller.dart'
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends GetView<MovieController> {
 
   @override
   Widget build(BuildContext context) {
