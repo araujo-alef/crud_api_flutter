@@ -101,6 +101,7 @@ class HomePage extends GetView<MovieController> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.greenAccent,
         child: Icon(Icons.add),
         onPressed: () {
           movie.cleanMovie();

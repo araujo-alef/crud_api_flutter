@@ -77,6 +77,7 @@ class _AddMovieState extends State<AddMovie> {
                     height: 30,
                   ),
                   FloatingActionButton(
+                    backgroundColor: Colors.greenAccent,
                     onPressed: () async {
                       final nome = movie.titleMovie.value;
                       final foto = movie.imageMovie.value;
@@ -95,7 +96,9 @@ class _AddMovieState extends State<AddMovie> {
                       Get.Get.back();
                       }
                     },
-                    child: Icon(Icons.add),
+                    child: movie.idMovie.value == "" ?
+                          Icon(Icons.add) :
+                          Icon(Icons.verified)
                   ),
                 ],
               ),
