@@ -16,7 +16,7 @@ class _AddMovieState extends State<AddMovie> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Adicionar Filme'),
+        title: movie.idMovie.value == "" ? Text('Adicionoar Filme') : Text("Editar filme"),
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 5, left: 30, right: 30),
