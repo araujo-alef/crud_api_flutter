@@ -58,6 +58,10 @@ class _AddMovieState extends State<AddMovie> {
                                         style: TextStyle(fontSize: 12)),
                                   ),
                                 ),
+                                Container(
+                                  alignment: Alignment.bottomRight,
+                                    child: Text(movie.elencoMovie.value,
+                                        style: TextStyle(fontSize: 10))),
                               ],
                             ),
                           ),
