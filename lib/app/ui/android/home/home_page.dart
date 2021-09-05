@@ -46,7 +46,7 @@ class HomePage extends GetView<MovieController> {
 
                                 movie.setMovie(title, image, descricao, elenco, id);
 
-                                Get.toNamed("addMovie");
+                                Get.toNamed("/addMovie");
                               },
                               icon: Icon(Icons.edit),
                               color: Colors.blueGrey,

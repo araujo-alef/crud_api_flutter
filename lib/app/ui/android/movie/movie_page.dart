@@ -112,6 +112,17 @@ class _MovieState extends State<Movie> {
                               child: Image(image: NetworkImage(movie.listMovie[index].foto.toString()), height: 160),
                             ),
                             subtitle: Text(movie.listMovie[index].nome.toString(), textAlign: TextAlign.center,),
+                            onTap: () {
+                              final title = movie.listMovie[index].nome.toString();
+                              final image = movie.listMovie[index].foto.toString();
+                              final descricao = movie.listMovie[index].descricao.toString();
+                              final elenco = movie.listMovie[index].elenco.toString();
+                              final id = movie.listMovie[index].id.toString();
+
+                              movie.setMovie(title, image, descricao, elenco, id);
+                              Get.Get.back();
+                              Get.Get.toNamed('/movie');
+                            },
                           ),
                         );
                       }
