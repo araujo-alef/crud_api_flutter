@@ -25,19 +25,41 @@ class _AddMovieState extends State<AddMovie> {
           key: _form,
           child: Column(
             children: <Widget>[
-              movie.idMovie.value == ""
-                  ? Container()
-                  : Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                              height: 100,
-                              child: Image(
-                                  image: NetworkImage(movie.imageMovie.value))),
-                        ],
-                      ),
+              Container(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Image(
+                          image: NetworkImage(movie.imageMovie.value),
+                          height: 160,
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 12),
+                                    child: Text(
+                                        movie.titleMovie.value,
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                  ),
+                                ),
+                                
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
+                  ],
+                ),
+              ),
               SizedBox(height: 20),
               TextFormField(
                 validator: (value) {
