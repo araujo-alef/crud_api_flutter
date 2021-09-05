@@ -50,7 +50,14 @@ class _AddMovieState extends State<AddMovie> {
                                       ),
                                   ),
                                 ),
-                                
+                                Container(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 12),
+                                    child: Text(movie.descricaoMovie.value,
+                                        textAlign: TextAlign.justify,
+                                        style: TextStyle(fontSize: 12)),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
