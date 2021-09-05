@@ -111,6 +111,7 @@ class _MovieState extends State<Movie> {
                               padding: const EdgeInsets.only(bottom: 8.0, top: 8),
                               child: Image(image: NetworkImage(movie.listMovie[index].foto.toString()), height: 160),
                             ),
+                            subtitle: Text(movie.listMovie[index].nome.toString(), textAlign: TextAlign.center,),
                           ),
                         );
                       }
