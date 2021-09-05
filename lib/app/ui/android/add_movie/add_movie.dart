@@ -31,10 +31,16 @@ class _AddMovieState extends State<AddMovie> {
                   children: [
                     Row(
                       children: [
-                        Image(
-                          image: NetworkImage(movie.imageMovie.value),
-                          height: 160,
-                        ),
+                        Builder(builder: (context) {
+                          if(movie.idMovie.value == "") {
+                            return Container();
+                          } else {
+                            return Image(
+                              image: NetworkImage(movie.imageMovie.value),
+                              height: 160,
+                            );
+                          }
+                        }),
                         Flexible(
                           child: Padding(
                             padding: const EdgeInsets.only(left: 8.0),
