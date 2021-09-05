@@ -107,7 +107,10 @@ class _MovieState extends State<Movie> {
                           width: 140,
                           height: 160,                  
                           child: ListTile(
-                            
+                            title: Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0, top: 8),
+                              child: Image(image: NetworkImage(movie.listMovie[index].foto.toString()), height: 160),
+                            ),
                           ),
                         );
                       }
