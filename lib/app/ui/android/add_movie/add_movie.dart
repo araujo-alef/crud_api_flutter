@@ -23,7 +23,8 @@ class _AddMovieState extends State<AddMovie> {
         padding: const EdgeInsets.only(top: 5, left: 30, right: 30),
         child: Form(
           key: _form,
-          child: Column(
+          child: 
+          Column(
             children: <Widget>[
               Container(
                 child: Column(

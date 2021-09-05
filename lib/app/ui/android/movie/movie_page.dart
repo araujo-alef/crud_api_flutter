@@ -77,12 +77,45 @@ class _MovieState extends State<Movie> {
                         textAlign: TextAlign.right,
                         style: TextStyle(fontStyle: FontStyle.italic),
                       )),
-                  SizedBox(
-                    height: 80,
-                  ),
                 ],
               ),
-            )
+            ),
+            Container(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 14.0),
+                child: Text(
+                  "Assista também",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(color: Colors.white.withOpacity(0.8)),
+                ),
+              ),
+            ),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Container(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: movie.listMovie.length,
+                    itemBuilder: (context, index) {
+                      if(movie.idMovie.value == movie.listMovie[index].id) {
+                        return Container();
+                      } else {
+                        return
+                          Container(
+                          width: 140,
+                          height: 160,                  
+                          child: ListTile(
+                            
+                          ),
+                        );
+                      }
+                    },
+                  )
+                ),
+              ),
+            ),
           ],
         ),
       ),
