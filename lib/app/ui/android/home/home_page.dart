@@ -70,21 +70,31 @@ class HomePage extends GetView<MovieController> {
                                 width: double.infinity,
                                 height: 310,
                                 child: ElevatedButton(
-                                style: TextButton.styleFrom(backgroundColor: Colors.black.withOpacity(0.6)),
-                                onPressed: (){},
-                                child: Container(
-                                  width: 120,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                    Icon(Icons.play_arrow),
-                                    Text('Ver mais')
-                                  ],),
+                                  style: TextButton.styleFrom(backgroundColor: Colors.black.withOpacity(0.6)),
+                                  child: Container(
+                                    width: 120,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                      Icon(Icons.play_arrow),
+                                      Text('Ver mais')
+                                    ],),
+                                  ),
+                                  onPressed: (){
+                                    final title = movie.listMovie[length].nome.toString();
+                                    final image = movie.listMovie[length].foto.toString();
+                                    final descricao = movie.listMovie[length].descricao.toString();
+                                    final elenco = movie.listMovie[length].elenco.toString();
+                                    final id = movie.listMovie[length].id.toString();
+
+                                    movie.setMovie(title, image, descricao, elenco, id);
+                                     Get.toNamed('/movie');
+                                  },
                                 ),
-                      ),
-                              )
+                              ),
                             ],
                           )),
+                      SizedBox(height: 16,),
                       Expanded(
                         child: ListView.builder(
                             itemCount: movie.listMovie.length,
